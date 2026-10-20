@@ -1,0 +1,6 @@
+{
+  "name": "GlowSync 日常保養品與保健品全方位指南",
+  "description": "專屬日常保養品、內服保健品與處方用藥精準排程指南，提供時段提醒、分區保養、奇偶週輪替與安全交互作用叮嚀。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
