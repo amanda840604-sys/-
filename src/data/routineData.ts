@@ -615,10 +615,10 @@ export const WEEKLY_NIGHT_ROUTINES: DayRoutine[] = [
   {
     dayOfWeek: 3, // 週三
     dayName: '週三',
-    themeTitle: '週三深層導出淨膚夜',
+    themeTitle: '週三離子儀(導出)淨膚夜',
     themeIcon: '🌿✨',
     oddWeekDetails: {
-      cleansing: '【儀器深層導出】#02 舒特膚潔膚水浸透化妝棉 ＋ #32 CHECK2CHECK 離子淨膚儀（深層導出模式）溫和導出毛孔殘妝 ➔ #04 綠茶洗面乳（T字下巴可局部加用少量 #05 綠番茄洗面乳）。',
+      cleansing: '【離子儀(導出)】#02 舒特膚潔膚水浸透化妝棉 ＋ #32 CHECK2CHECK 離子儀(導出模式) 溫和導出毛孔殘妝 ➔ #04 綠茶洗面乳（T字下巴可局部加用少量 #05 綠番茄洗面乳）。',
       steps: [
         { step: 1, label: '前導深入', productNumbers: ['11'], details: '黛珂小紫瓶 1~2 下，以手溫按拍剛導出完的清透肌膚。', zone: '全臉' },
         { step: 2, label: '積雪草噴霧', productNumbers: ['09'], details: 'BIO HEAL BOH 保濕潤澤噴霧全臉輕噴。', zone: '全臉' },
@@ -626,10 +626,10 @@ export const WEEKLY_NIGHT_ROUTINES: DayRoutine[] = [
         { step: 4, label: '兩頰鎖水', productNumbers: ['21'], details: '【兩頰】擦 S.NATURE 水庫角鯊烷保濕霜。', zone: '兩頰' },
         { step: 5, label: '下巴呼吸鎖水', productNumbers: ['18'], details: '【下巴】薄擦 MUJI 米糠乳液，享受導出後的無負擔暢通感。', zone: '下巴' }
       ],
-      notes: '離子導出利用正負電荷吸附深層彩妝殘留與角質髒污，動作保持輕柔順滑即可。'
+      notes: '離子儀(導出)利用電荷吸附彩妝殘留與角質髒污，動作保持輕柔順滑即可。'
     },
     evenWeekDetails: {
-      cleansing: '【儀器導出＋局部清潔】#02 舒特膚潔膚水 ＋ #32 離子淨膚儀深層導出 ➔ #04 綠茶洗面乳（下巴局部搭配 #05 綠番茄洗面乳洗淨）。',
+      cleansing: '【離子儀(導出)＋清潔】#02 舒特膚潔膚水 ＋ #32 離子儀(導出) ➔ #04 綠茶洗面乳（下巴局部搭配 #05 綠番茄洗面乳洗淨）。',
       steps: [
         { step: 1, label: '前導導入', productNumbers: ['11'], details: '黛珂小紫瓶掌心按拍打底。', zone: '全臉' },
         { step: 2, label: '加強保濕面膜', productNumbers: ['33'], details: '【偶數週三・面膜加強夜】導出清潔後，敷上一片【#33 一般日常保濕面膜】10～15 分鐘！深層注水。', zone: '全臉' },

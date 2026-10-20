@@ -10,6 +10,7 @@ import {
   Clock,
   Eye,
   ArrowRight,
+  ArrowLeft,
   Filter,
   Zap,
   Flame,
@@ -22,7 +23,7 @@ import { SKINCARE_PRODUCTS, WEEKLY_NIGHT_ROUTINES, PRESCRIPTION_MEDS, ORAL_SUPPL
 import { formatChineseDate, getISOWeekNumber } from '../utils/dateUtils';
 
 export interface DeviceUsageGuide {
-  mode: '深層導出' | '保濕導入';
+  mode: '導出' | '導入';
   name: string;
   pairingProduct: string;
   duration: string;
@@ -76,7 +77,6 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
   const getProduct = (num: string) => SKINCARE_PRODUCTS.find(p => p.number === num);
 
   // Calculate which day in the 4-week cycle corresponds to "Today"
-  // Day of week: 1=Mon ... 6=Sat, 0=Sun
   const todayDayOfWeek = currentDate.getDay();
   // Map dayOfWeek (1=Mon ... 0=Sun) into 1-indexed (Mon=1, Tue=2, Wed=3, Thu=4, Fri=5, Sat=6, Sun=7)
   const dayOffset = todayDayOfWeek === 0 ? 7 : todayDayOfWeek;
@@ -96,7 +96,7 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
         weekNumber: w as 1 | 2 | 3 | 4,
         weekType,
         typeCode: 'A',
-        typeName: '類型 A：一般修護夜',
+        typeName: '類型 A · 溫和修護',
         typeColor: {
           bg: 'bg-emerald-50/40',
           border: 'border-emerald-200',
@@ -106,8 +106,8 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
         },
         title: '日常溫和修護',
         summary: weekType === 'odd'
-          ? '日間防曬，夜間溫和卸洗 ＋ 靈芝水 ＋ BOH噴霧 ＋ 兩頰S.NATURE／下巴米糠乳'
-          : '偶數週修護：MUJI化妝水 ＋ Ongredients噴霧 ＋ 契爾氏冰河霜(兩頰)',
+          ? '日間防曬，夜間溫和卸洗 ＋ 靈芝水 ＋ BOH噴霧 ＋ 兩頰S.NATURE霜／下巴米糠乳'
+          : '偶數週修護：MUJI化妝水 ＋ Ongredients噴霧 ＋ 契爾氏冰河霜(兩頰)／下巴米糠乳',
         productNumbers: weekType === 'odd' ? ['03', '04', '11', '07', '09', '21', '18'] : ['03', '04', '11', '08', '10', '23', '18']
       });
 
@@ -118,7 +118,7 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
         weekNumber: w as 1 | 2 | 3 | 4,
         weekType,
         typeCode: 'B',
-        typeName: '類型 B：15 寶拉水楊酸夜 (固定週二)',
+        typeName: '類型 B · 水楊酸煥膚',
         typeColor: {
           bg: 'bg-amber-50/50',
           border: 'border-amber-300',
@@ -126,19 +126,19 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
           badgeBg: 'bg-amber-100',
           badgeText: 'text-amber-900'
         },
-        title: '15 寶拉 2% 水楊酸煥膚',
-        summary: '下巴與鼻翼點塗 15 寶拉水楊酸（靜置3-5分鐘），兩頰嚴禁碰酸！MUJI化妝水打底',
+        title: '寶拉水楊酸煥膚',
+        summary: '下巴與鼻翼點塗寶拉水楊酸（靜置3-5分鐘），兩頰嚴禁碰酸！MUJI化妝水打底',
         productNumbers: ['01', '04', '15', '11', '08', '25', weekType === 'odd' ? '21' : '23', '18']
       });
 
-      // Wed (dayOfWeek 3) -> ⚡ 美容儀深層導出
+      // Wed (dayOfWeek 3) -> ⚡ 離子儀(導出)
       days.push({
         dayNumber: (w - 1) * 7 + 3,
         dayOfWeek: 3,
         weekNumber: w as 1 | 2 | 3 | 4,
         weekType,
         typeCode: 'A',
-        typeName: weekType === 'odd' ? '類型 A：深層導出夜' : '類型 A：導出＋面膜加強',
+        typeName: weekType === 'odd' ? '類型 A · 離子儀(導出)' : '類型 A · 導出＋面膜',
         typeColor: {
           bg: 'bg-teal-50/40',
           border: 'border-teal-300',
@@ -146,18 +146,18 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
           badgeBg: 'bg-teal-100',
           badgeText: 'text-teal-900'
         },
-        title: weekType === 'odd' ? '⚡ 離子深層導出 ＋ ANUA提亮' : '⚡ 離子導出 ＋ 33保濕面膜深層注水',
+        title: weekType === 'odd' ? '離子儀(導出) ＋ ANUA提亮' : '離子儀(導出) ＋ 保濕面膜',
         summary: weekType === 'odd'
-          ? '02 舒特膚潔膚水 ＋ 32 CHECK2CHECK 離子深層導出毛孔殘妝 ➔ ANUA桃子精華提亮'
-          : '32 離子淨膚儀深層導出殘妝 ＋ 敷一片 33 一般保濕面膜（10-15分）＋ 契爾氏冰河霜封層',
+          ? '舒特膚潔膚水 ＋ 離子儀(導出)毛孔殘妝 ➔ ANUA桃子精華提亮'
+          : '離子儀(導出)殘妝 ＋ 敷一片保濕修護面膜（10-15分）＋ 契爾氏冰河霜封層',
         productNumbers: weekType === 'odd' ? ['02', '32', '04', '11', '09', '13', '21', '18'] : ['02', '32', '04', '11', '33', '10', '23', '18'],
         deviceUsage: {
-          mode: '深層導出',
-          name: '#32 CHECK2CHECK 離子淨膚儀（深層導出模式）',
-          pairingProduct: '#02 Cetaphil 舒特膚 胜肽緊緻賦活潔膚水',
+          mode: '導出',
+          name: 'CHECK2CHECK 離子儀(導出)',
+          pairingProduct: 'Cetaphil 舒特膚 胜肽緊緻賦活潔膚水',
           duration: '3 ～ 5 分鐘',
-          instructions: '將化妝棉充分浸濕 #02 舒特膚潔膚水後固定於淨膚儀金屬探頭上，開啟「深層導出模式」。由臉部中央向外、由下往上順著肌膚紋理輕柔滑動。在下巴反覆粉刺區與鼻翼兩側特別加強畫圓打圈，利用離子電荷吸附導出深層殘妝與毛孔髒污。',
-          tips: '導出時輕輕貼合肌膚滑動即可，千萬不要大力拉扯！導出完畢後接著使用 #04 綠茶洗面乳洗淨全臉。'
+          instructions: '將化妝棉充分浸濕舒特膚潔膚水後固定於儀器金屬探頭上，開啟「導出模式」。由臉部中央向外、由下往上順著肌膚紋理輕柔滑動。在下巴反覆粉刺區與鼻翼兩側特別加強畫圓打圈，利用離子電荷吸附導出深層殘妝與毛孔髒污。',
+          tips: '導出時輕輕貼合肌膚滑動即可，千萬不要大力拉扯！導出完畢後接著使用綠茶洗面乳洗淨全臉。'
         }
       });
 
@@ -168,7 +168,7 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
         weekNumber: w as 1 | 2 | 3 | 4,
         weekType,
         typeCode: 'C',
-        typeName: '類型 C：17 A醇微晶夜 (固定週四)',
+        typeName: '類型 C · A醇微晶',
         typeColor: {
           bg: 'bg-indigo-50/50',
           border: 'border-indigo-300',
@@ -176,8 +176,8 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
           badgeBg: 'bg-indigo-100',
           badgeText: 'text-indigo-900'
         },
-        title: '17 Celimax A 醇微晶抗老',
-        summary: '改善眼下細紋與角質；塗 A 醇前先以 25 雅詩蘭黛眼霜隔離眼周！豌豆大小避開眼周',
+        title: 'Celimax A 醇微晶抗老',
+        summary: '改善細紋與角質代謝；塗 A 醇前先以雅詩蘭黛眼霜隔離眼周！豌豆大小避開眼周',
         productNumbers: ['01', '04', '11', '08', '25', '17', weekType === 'odd' ? '21' : '23', '18']
       });
 
@@ -188,7 +188,7 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
         weekNumber: w as 1 | 2 | 3 | 4,
         weekType,
         typeCode: 'A',
-        typeName: weekType === 'odd' ? '類型 A：日常修護夜' : '類型 A：下巴控油修護',
+        typeName: weekType === 'odd' ? '類型 A · 舒緩修復' : '類型 A · 局部控油',
         typeColor: {
           bg: 'bg-emerald-50/40',
           border: 'border-emerald-200',
@@ -196,21 +196,21 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
           badgeBg: 'bg-emerald-100',
           badgeText: 'text-emerald-800'
         },
-        title: weekType === 'odd' ? '舒緩修復 A 醇後角質' : '偶數週：下巴局部點塗 TO 鋅',
+        title: weekType === 'odd' ? '舒緩屏障修護' : '下巴局部點塗菸鹼醯胺',
         summary: weekType === 'odd'
           ? '週末前夕舒緩放鬆，以靈芝水與角鯊烷霜強化保濕屏障，下巴維持米糠乳'
-          : '下巴易出油粉刺區微量點塗 14 The Ordinary 菸鹼醯胺控油（絕不塗兩頰）',
+          : '下巴易出油粉刺區微量點塗 The Ordinary 菸鹼醯胺控油（絕不塗兩頰）',
         productNumbers: weekType === 'odd' ? ['03', '04', '11', '07', '25', '21', '18'] : ['03', '04', '11', '08', '14', '25', '23', '18']
       });
 
-      // Sat (dayOfWeek 6) -> 偶數週六 ⚡ 美容儀保濕導入
+      // Sat (dayOfWeek 6) -> 偶數週六 ⚡ 離子儀(導入)
       days.push({
         dayNumber: (w - 1) * 7 + 6,
         dayOfWeek: 6,
         weekNumber: w as 1 | 2 | 3 | 4,
         weekType,
         typeCode: 'A',
-        typeName: weekType === 'odd' ? '類型 A：酵素去角質' : '類型 A：⚡ 离儀胜肽導入',
+        typeName: weekType === 'odd' ? '類型 A · 酵素代謝' : '類型 A · 離子儀(導入)',
         typeColor: {
           bg: weekType === 'odd' ? 'bg-emerald-50/40' : 'bg-purple-50/50',
           border: weekType === 'odd' ? 'border-emerald-200' : 'border-purple-300',
@@ -218,20 +218,20 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
           badgeBg: weekType === 'odd' ? 'bg-emerald-100' : 'bg-purple-100',
           badgeText: weekType === 'odd' ? 'text-emerald-800' : 'text-purple-800'
         },
-        title: weekType === 'odd' ? '06 suisai 酵素洗顏粉' : '⚡ 32 CHECK2CHECK 保濕導入',
+        title: weekType === 'odd' ? 'suisai 酵素洗顏代謝' : '離子儀(導入) ＋ 胜肽安瓶',
         summary: weekType === 'odd'
-          ? '06 佳麗寶 suisai 酵素洗顏粉溫和代謝老廢角質與下巴粉刺，停用酸類'
-          : '32 離子淨膚儀（保濕導入模式 ＋ 12 Medicube PDRN安瓶）＋ 契爾氏冰河霜強力鎖水',
+          ? '佳麗寶 suisai 酵素洗顏粉溫和代謝老廢角質與下巴粉刺，當晚停用酸類'
+          : '離子儀(導入)搭配 Medicube PDRN 胜肽安瓶 ＋ 契爾氏冰河霜強力鎖水',
         productNumbers: weekType === 'odd' ? ['01', '06', '11', '07', '21', '18'] : ['01', '04', '11', '12', '32', '23', '18'],
         isMakeupDay: true,
         ...(weekType === 'even' ? {
           deviceUsage: {
-            mode: '保濕導入',
-            name: '#32 CHECK2CHECK 離子淨膚儀（保濕導入模式）',
-            pairingProduct: '#12 Medicube PDRN 粉紅胜肽補水安瓶',
+            mode: '導入',
+            name: 'CHECK2CHECK 離子儀(導入)',
+            pairingProduct: 'Medicube PDRN 粉紅胜肽補水安瓶',
             duration: '5 分鐘',
-            instructions: '全臉按拍 #11 黛珂小紫瓶打底後，均勻滴上 3~4 滴 #12 Medicube PDRN 胜肽安瓶。開啟淨膚儀「保濕導入模式」，以金屬探頭貼合臉部皮膚，順著下巴輪廓線、兩頰向太陽穴方向緩慢向上滑動按摩，透過溫感與微震動將胜肽小分子推入肌底。',
-            tips: '導入完成後肌膚水潤透亮，兩頰請立刻厚塗 #23 契爾氏冰河霜封存，下巴薄擦 #18 米糠乳。'
+            instructions: '全臉按拍黛珂小紫瓶打底後，均勻滴上 3~4 滴 Medicube PDRN 胜肽安瓶。開啟淨膚儀「導入模式」，以金屬探頭貼合臉部皮膚，順著下巴輪廓線、兩頰向太陽穴方向緩慢向上滑動按摩，透過溫感與微震動將胜肽小分子推入肌底。',
+            tips: '導入完成後肌膚水潤透亮，兩頰請立刻厚塗契爾氏冰河霜封存，下巴薄擦米糠乳液。'
           }
         } : {})
       });
@@ -243,7 +243,7 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
         weekNumber: w as 1 | 2 | 3 | 4,
         weekType,
         typeCode: 'D',
-        typeName: weekType === 'odd' ? '類型 D：AZ100痘痘藍膜夜 (奇數週)' : '類型 D：一般保濕面膜夜 (偶數週)',
+        typeName: weekType === 'odd' ? '類型 D · 痘痘藍膜' : '類型 D · 保濕面膜',
         typeColor: weekType === 'odd' 
           ? {
               bg: 'bg-amber-50/50',
@@ -259,10 +259,10 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
               badgeBg: 'bg-teal-100',
               badgeText: 'text-teal-900'
             },
-        title: weekType === 'odd' ? '30 Quality 1st AZ100 痘痘藍膜日' : '33 一般日常保濕面膜日',
+        title: weekType === 'odd' ? 'AZ100 痘痘藍膜日' : '一般日常保濕面膜日',
         summary: weekType === 'odd'
-          ? '敷 30 藍瓶 AZ100 壬二酸面膜（10-15分），噴 BOH 噴霧，兩頰以 22 Dr. Reju-All 修復霜強力封層（下巴薄擦 18 米糠乳）'
-          : '敷 33 一般日常保濕面膜（10-15分），取下後噴 10 Ongredients 噴霧，兩頰立刻用 23 契爾氏冰河霜強力封層（下巴薄擦 18 米糠乳）',
+          ? '敷 AZ100 壬二酸藍膜（10-15分），噴 BOH 噴霧，兩頰以 Dr. Reju-All 修復霜強力封層（下巴薄擦米糠乳）'
+          : '敷一般日常保濕面膜（10-15分），噴 Ongredients 噴霧，兩頰以契爾氏冰河霜強力封層（下巴薄擦米糠乳）',
         productNumbers: weekType === 'odd' ? ['02', '04', '11', '30', '09', '22', '18'] : ['02', '04', '11', '33', '10', '23', '18']
       });
     }
@@ -277,42 +277,57 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
     ? allCycleDays 
     : allCycleDays.filter(d => d.typeCode === filterType);
 
+  // Navigation handlers for prev/next day
+  const handlePrevDay = () => {
+    if (!selectedDayDetail) return;
+    const currentIdx = allCycleDays.findIndex(d => d.dayNumber === selectedDayDetail.dayNumber);
+    const prevIdx = (currentIdx - 1 + allCycleDays.length) % allCycleDays.length;
+    setSelectedDayDetail(allCycleDays[prevIdx]);
+  };
+
+  const handleNextDay = () => {
+    if (!selectedDayDetail) return;
+    const currentIdx = allCycleDays.findIndex(d => d.dayNumber === selectedDayDetail.dayNumber);
+    const nextIdx = (currentIdx + 1) % allCycleDays.length;
+    setSelectedDayDetail(allCycleDays[nextIdx]);
+  };
+
   const weekHeaders = [
-    { title: '週一 (Mon · 類型A 修護)', icon: '💧' },
-    { title: '週二 (Tue · 類型B 水楊酸)', icon: '🧪' },
-    { title: '週三 (Wed · ⚡ 離子導出)', icon: '🌿' },
-    { title: '週四 (Thu · 類型C A醇)', icon: '🌙' },
-    { title: '週五 (Fri · 類型A 修護)', icon: '💧' },
-    { title: '週六 (Sat · 去角質/⚡導入)', icon: '🌟' },
-    { title: '週日 (Sun · 雙週面膜交替)', icon: '✨' },
+    { title: '週一 · 類型A 修護', icon: '💧' },
+    { title: '週二 · 類型B 水楊酸', icon: '🧪' },
+    { title: '週三 · 離子儀(導出)', icon: '🌿' },
+    { title: '週四 · 類型C A醇', icon: '🌙' },
+    { title: '週五 · 類型A 修護', icon: '💧' },
+    { title: '週六 · 去角質/導入', icon: '🌟' },
+    { title: '週日 · 雙週面膜', icon: '✨' },
   ];
 
   const weekMeta = [
     {
       weekNum: 1,
-      title: '第 1 週：基底穩固與淨膚啟動（奇數週 · 週末 suisai 酵素代謝 & AZ100 壬二酸面膜）',
-      subtitle: '早晨使用 09 BOH 噴霧 ＋ 13 ANUA 桃子精華；週三【⚡ 32 離子淨膚儀導出＋ANUA提亮】；週四【17 A醇微晶】；週六【06 suisai 酵素洗顏粉】；週日【30 AZ100 藍瓶面膜 ＋ 22 Dr. Reju-All 修復霜】。'
+      title: '第 1 週：基底穩固與淨膚啟動（奇數週 · 週末 suisai 酵素代謝 & AZ100 痘痘藍膜）',
+      subtitle: '早晨使用 BOH 噴霧 ＋ ANUA 桃子精華；週三【⚡ 離子儀(導出) ＋ ANUA提亮】；週四【A醇微晶】；週六【suisai 酵素洗顏粉】；週日【AZ100 藍膜 ＋ Dr. Reju-All 修復霜】。'
     },
     {
       weekNum: 2,
-      title: '第 2 週：水光激活與微針輪替（偶數週 · 週六離子導入 & 週日 VT 300 微針夜）',
-      subtitle: '早晨使用 10 Ongredients 噴霧 ＋ 12 Medicube 安瓶 ＋ 20 黛珂 AQ 乳；週三【⚡ 32 淨膚儀導出＋33保濕面膜深層注水】；週四【17 A醇微晶】；週五【TO 菸鹼醯胺下巴控油】；週六【⚡ 32 淨膚儀保濕導入＋12 Medicube安瓶】；週日【33 一般日常保濕面膜日】。'
+      title: '第 2 週：水光激活與深層注水（偶數週 · 週六離子導入 & 週日 保濕面膜）',
+      subtitle: '早晨使用 Ongredients 噴霧 ＋ Medicube 安瓶 ＋ 黛珂 AQ 乳；週三【⚡ 離子儀(導出) ＋ 保濕面膜深層注水】；週四【A醇微晶】；週五【菸鹼醯胺下巴控油】；週六【⚡ 離子儀(導入) ＋ Medicube安瓶】；週日【一般日常保濕面膜日】。'
     },
     {
       weekNum: 3,
-      title: '第 3 週：屏障強韌與角質更新（奇數週 · 週末 suisai 酵素代謝 & AZ100 壬二酸面膜）',
-      subtitle: '循環奇數週流程：早晨 09 BOH 噴霧 ＋ 13 ANUA 桃子精華；週三【⚡ 32 離子淨膚儀導出＋ANUA提亮】；週四【17 A醇微晶】；週六【06 suisai 酵素粉】；週日【30 AZ100 面膜】。'
+      title: '第 3 週：屏障強韌與角質更新（奇數週 · 週末 suisai 酵素代謝 & AZ100 痘痘藍膜）',
+      subtitle: '循環奇數週流程：早晨 BOH 噴霧 ＋ ANUA 桃子精華；週三【⚡ 離子儀(導出) ＋ ANUA提亮】；週四【A醇微晶】；週六【suisai 酵素粉】；週日【AZ100 藍膜】。'
     },
     {
       weekNum: 4,
-      title: '第 4 週：深層滲透與細緻收尾（偶數週 · 週六離子導入 & 週日 VT 300 微針夜）',
-      subtitle: '循環偶數週流程：早晨 10 Ongredients 噴霧 ＋ 12 Medicube 安瓶 ＋ 20 AQ 乳；週三【⚡ 32 淨膚儀導出＋33保濕面膜深層注水】；週四【17 A醇微晶】；週五【TO 菸鹼醯胺】；週六【⚡ 32 淨膚儀保濕導入＋12 Medicube安瓶】；週日【33 一般保濕面膜日】。'
+      title: '第 4 週：深層滲透與細緻收尾（偶數週 · 週六離子導入 & 週日 保濕面膜）',
+      subtitle: '循環偶數週流程：早晨 Ongredients 噴霧 ＋ Medicube 安瓶 ＋ AQ 乳；週三【⚡ 離子儀(導出) ＋ 保濕面膜深層注水】；週四【A醇微晶】；週五【菸鹼醯胺控油】；週六【⚡ 離子儀(導入) ＋ Medicube安瓶】；週日【一般保濕面膜日】。'
     }
   ];
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-16">
-      {/* 🌟 NEW: 今日重點專區 (Today's Key Focus Spotlight Banner) */}
+      {/* 🌟 今日重點專區 (Today's Key Focus Spotlight Banner) */}
       <div className="bg-gradient-to-r from-stone-900 via-rose-950 to-stone-900 text-white rounded-3xl p-6 sm:p-7 shadow-xl border border-rose-900/40 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-rose-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
@@ -348,19 +363,19 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
             {/* Quick highlights: Zoning & Device status */}
             <div className="flex flex-wrap items-center gap-2.5 pt-1 text-xs">
               <div className="flex items-center gap-1.5 bg-black/30 border border-white/15 px-3 py-1.5 rounded-xl">
-                <span className="w-2 h-2 rounded-full bg-rose-400" />
-                <span><strong>兩頰分區：</strong>{currentWeekType === 'odd' ? '#21 S.NATURE 霜滋潤' : '#23 契爾氏冰河霜封層'}</span>
+                <span className="w-2 h-2 rounded-full bg-rose-400 shrink-0" />
+                <span><strong>兩頰分區：</strong>{currentWeekType === 'odd' ? 'S.NATURE 水庫霜滋潤' : '契爾氏冰河霜封層'}</span>
               </div>
               <div className="flex items-center gap-1.5 bg-black/30 border border-white/15 px-3 py-1.5 rounded-xl">
-                <span className="w-2 h-2 rounded-full bg-amber-400" />
-                <span><strong>下巴分區：</strong>固定薄擦 #18 MUJI 米糠乳液</span>
+                <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />
+                <span><strong>下巴分區：</strong>固定薄擦 MUJI 米糠乳液</span>
               </div>
 
               {/* Device alert for today */}
               {todayCycleData.deviceUsage ? (
                 <div className="flex items-center gap-1.5 bg-amber-500/20 border border-amber-400/40 text-amber-300 px-3 py-1.5 rounded-xl font-bold">
-                  <Zap className="w-4 h-4 text-amber-400 animate-bounce" />
-                  <span>⚡ 今日任務：使用 #32 離子淨膚儀（{todayCycleData.deviceUsage.mode}模式）</span>
+                  <Zap className="w-4 h-4 text-amber-400 animate-bounce shrink-0" />
+                  <span>⚡ 今日任務：使用 離子儀({todayCycleData.deviceUsage.mode})</span>
                 </div>
               ) : (
                 <div className="flex items-center gap-1.5 bg-white/5 border border-white/10 text-stone-400 px-3 py-1.5 rounded-xl">
@@ -401,58 +416,53 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
         </div>
       </div>
 
-      {/* Top Legend Box ("輪值類型圖例") - Exactly matching reference image layout */}
+      {/* Top Legend Box ("輪值類型圖例") - Auto wrapping & clean layout */}
       <div className="bg-white rounded-3xl p-5 sm:p-6 border border-stone-200/90 shadow-xs space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-stone-700">
-            <span className="font-bold text-stone-900 mr-1 flex items-center gap-1.5">
+          <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-stone-700">
+            <span className="font-bold text-stone-900 mr-1 flex items-center gap-1.5 shrink-0">
               <Sparkles className="w-4 h-4 text-rose-500" />
               輪值類型圖例：
             </span>
             <button
               onClick={() => setFilterType(filterType === 'A' ? 'all' : 'A')}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl transition-all ${
-                filterType === 'A' ? 'bg-emerald-100 ring-2 ring-emerald-500 font-bold' : 'hover:bg-stone-100'
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl transition-all text-xs ${
+                filterType === 'A' ? 'bg-emerald-100 ring-2 ring-emerald-500 font-bold text-emerald-900' : 'hover:bg-stone-100 bg-stone-50 border border-stone-200'
               }`}
             >
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-              <span>類型 A：一般修護夜 (週一/三/五/六)</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
+              <span className="break-words">類型 A：溫和修護夜 (週一/三/五/六)</span>
             </button>
             <button
               onClick={() => setFilterType(filterType === 'B' ? 'all' : 'B')}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl transition-all ${
-                filterType === 'B' ? 'bg-amber-100 ring-2 ring-amber-500 font-bold' : 'hover:bg-stone-100'
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl transition-all text-xs ${
+                filterType === 'B' ? 'bg-amber-100 ring-2 ring-amber-500 font-bold text-amber-950' : 'hover:bg-stone-100 bg-stone-50 border border-stone-200'
               }`}
             >
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-              <span>類型 B：15 寶拉水楊酸夜 (固定週二)</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-500 shrink-0" />
+              <span className="break-words">類型 B：寶拉水楊酸 (週二)</span>
             </button>
             <button
               onClick={() => setFilterType(filterType === 'C' ? 'all' : 'C')}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl transition-all ${
-                filterType === 'C' ? 'bg-indigo-500 text-white rounded-lg px-2' : 'hover:bg-stone-100'
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl transition-all text-xs ${
+                filterType === 'C' ? 'bg-indigo-100 ring-2 ring-indigo-500 font-bold text-indigo-950' : 'hover:bg-stone-100 bg-stone-50 border border-stone-200'
               }`}
             >
-              <span className="w-2.5 h-2.5 rounded-full bg-indigo-500" />
-              <span>類型 C：17 Celimax A 醇微晶 (固定週四)</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-indigo-500 shrink-0" />
+              <span className="break-words">類型 C：Celimax A醇 (週四)</span>
             </button>
             <button
               onClick={() => setFilterType(filterType === 'D' ? 'all' : 'D')}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl transition-all ${
-                filterType === 'D' ? 'bg-amber-100 ring-2 ring-amber-500 font-bold' : 'hover:bg-stone-100'
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl transition-all text-xs ${
+                filterType === 'D' ? 'bg-rose-100 ring-2 ring-rose-500 font-bold text-rose-950' : 'hover:bg-stone-100 bg-stone-50 border border-stone-200'
               }`}
             >
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-              <span>類型 D：週末深度面膜夜 (奇數AZ100 / 偶數一般保濕)</span>
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0" />
+              <span className="break-words">類型 D：週末深度面膜 (週日)</span>
             </button>
-            {/* Prominent device legend badge */}
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-purple-50 text-purple-900 border border-purple-200 font-bold">
-              <Zap className="w-3.5 h-3.5 text-purple-600" />
-              <span>⚡ 離子儀：週三【深層導出】／ 偶週六【保濕導入】</span>
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-cyan-800">
-              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
-              <span>週末底妝日 (週六 AM)</span>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-purple-50 text-purple-900 border border-purple-200 font-bold text-xs">
+              <Zap className="w-3.5 h-3.5 text-purple-600 shrink-0" />
+              <span className="break-words">⚡ 離子儀：週三導出 · 偶週六導入</span>
             </span>
           </div>
 
@@ -474,7 +484,7 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
           {weekHeaders.map((hdr, idx) => (
             <div key={idx} className="flex items-center justify-center gap-1 py-1">
               <span>{hdr.icon}</span>
-              <span>{hdr.title}</span>
+              <span className="break-words">{hdr.title}</span>
             </div>
           ))}
         </div>
@@ -488,10 +498,10 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
               {/* Week Header Row */}
               <div className="bg-stone-50/80 rounded-2xl p-3 border border-stone-200/80">
                 <h3 className="font-extrabold text-stone-900 text-sm flex items-center gap-2">
-                  <span className={`w-2.5 h-2.5 rounded-full ${wInfo.weekNum % 2 === 1 ? 'bg-rose-500' : 'bg-emerald-600'}`} />
-                  {wInfo.title}
+                  <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${wInfo.weekNum % 2 === 1 ? 'bg-rose-500' : 'bg-emerald-600'}`} />
+                  <span className="break-words">{wInfo.title}</span>
                 </h3>
-                <p className="text-xs text-stone-600 mt-1 leading-relaxed">
+                <p className="text-xs text-stone-600 mt-1 leading-relaxed break-words">
                   {wInfo.subtitle}
                 </p>
               </div>
@@ -507,10 +517,10 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
                     <div
                       key={day.dayNumber}
                       onClick={() => setSelectedDayDetail(day)}
-                      className={`rounded-2xl p-3.5 border transition-all cursor-pointer flex flex-col justify-between group relative ${
+                      className={`rounded-2xl p-3.5 border transition-all cursor-pointer flex flex-col justify-between group relative select-none ${
                         day.typeColor.bg
                       } ${day.typeColor.border} ${
-                        isFilteredOut ? 'opacity-30' : 'hover:shadow-md hover:scale-[1.01]'
+                        isFilteredOut ? 'opacity-30' : 'hover:shadow-lg hover:border-stone-400 hover:-translate-y-0.5'
                       } ${
                         isToday 
                           ? 'ring-3 ring-rose-500 shadow-md shadow-rose-500/20' 
@@ -519,15 +529,15 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
                           : ''
                       }`}
                     >
-                      <div>
+                      <div className="space-y-2.5">
                         {/* Day Number, Today Badge and Checkbox */}
-                        <div className="flex items-center justify-between gap-1 mb-1.5">
-                          <div className="flex items-center gap-1.5">
+                        <div className="flex items-center justify-between gap-1">
+                          <div className="flex items-center gap-1.5 flex-wrap">
                             <span className="font-black text-xs font-mono text-stone-900">
                               DAY {day.dayNumber}
                             </span>
                             {isToday && (
-                              <span className="text-[9px] font-black px-1.5 py-0.2 rounded-md bg-rose-600 text-white animate-pulse">
+                              <span className="text-[9px] font-black px-1.5 py-0.5 rounded-md bg-rose-600 text-white animate-pulse">
                                 今日
                               </span>
                             )}
@@ -538,65 +548,47 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
                               e.stopPropagation();
                               onToggleDayCompleted(day.dayNumber);
                             }}
-                            className="text-stone-400 hover:text-emerald-600 transition-colors"
+                            className="text-stone-400 hover:text-emerald-600 p-0.5 transition-colors shrink-0"
                             title={isCompleted ? '標記為未完成' : '標記此日已完成'}
                           >
                             {isCompleted ? (
                               <CheckCircle2 className="w-4 h-4 text-emerald-600 fill-emerald-50" />
                             ) : (
-                              <Circle className="w-4 h-4" />
+                              <Circle className="w-4 h-4 hover:text-stone-600" />
                             )}
                           </button>
                         </div>
 
-                        {/* Type Badge */}
-                        <div className="mb-1.5">
-                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md block truncate ${day.typeColor.badgeBg} ${day.typeColor.badgeText}`}>
+                        {/* Type Badge - Auto wraps properly without being cut off */}
+                        <div>
+                          <span className={`text-[11px] font-bold px-2 py-0.5 rounded-lg inline-block break-words whitespace-normal leading-snug tracking-tight ${day.typeColor.badgeBg} ${day.typeColor.badgeText}`}>
                             {day.typeName}
                           </span>
                         </div>
 
+                        {/* Card Title - Clean without useless numbers */}
+                        <h4 className="text-xs sm:text-sm font-black text-stone-900 leading-snug break-words">
+                          {day.title}
+                        </h4>
+
                         {/* Device Badge if applicable */}
                         {day.deviceUsage && (
-                          <div className="mb-1.5">
-                            <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-md bg-purple-100 text-purple-900 border border-purple-300 flex items-center gap-1">
-                              <Zap className="w-2.5 h-2.5 text-purple-700 shrink-0" />
-                              <span className="truncate">⚡ 離子淨膚儀（{day.deviceUsage.mode}）</span>
+                          <div>
+                            <span className="text-[10.5px] font-extrabold px-2 py-0.5 rounded-md bg-purple-100 text-purple-900 border border-purple-200 inline-flex items-center gap-1 leading-snug break-words">
+                              <Zap className="w-3 h-3 text-purple-700 shrink-0" />
+                              <span>⚡ 離子儀({day.deviceUsage.mode})</span>
                             </span>
                           </div>
                         )}
-
-                        {/* Summary Description */}
-                        <p className="text-[11px] text-stone-700 leading-snug line-clamp-3 mb-2 font-medium">
-                          {day.summary}
-                        </p>
-
-                        {/* Product Numbers Chips */}
-                        <div className="flex flex-wrap gap-1 mb-2">
-                          {day.productNumbers.slice(0, 3).map((num) => (
-                            <span
-                              key={num}
-                              className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-md ${
-                                num === '32' 
-                                  ? 'bg-purple-600 text-white font-extrabold' 
-                                  : 'bg-white/80 border border-stone-200 text-stone-700'
-                              }`}
-                            >
-                              #{num}
-                            </span>
-                          ))}
-                          {day.productNumbers.length > 3 && (
-                            <span className="text-[10px] font-bold px-1.5 py-0.2 rounded-md bg-white/60 text-stone-500">
-                              +{day.productNumbers.length - 3}
-                            </span>
-                          )}
-                        </div>
                       </div>
 
-                      {/* Bottom SOP Link */}
-                      <div className="pt-2 border-t border-stone-200/60 flex items-center justify-between text-[11px] text-stone-600 group-hover:text-rose-600 font-semibold">
-                        <span>詳細保養品SOP</span>
-                        <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                      {/* Card Footer: Clear action hint */}
+                      <div className="mt-3.5 pt-2 border-t border-stone-200/60 flex items-center justify-between text-[11px] font-bold text-stone-500 group-hover:text-rose-600 transition-colors">
+                        <span className="flex items-center gap-1">
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>查看完整 SOP</span>
+                        </span>
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
                       </div>
                     </div>
                   );
@@ -607,36 +599,59 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
         })}
       </div>
 
-      {/* Day SOP Drawer / Modal with Device Detailed Instructions */}
+      {/* Day SOP Drawer / Modal with Next/Prev Navigation */}
       {selectedDayDetail && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200">
           <div className="bg-white rounded-3xl max-w-xl w-full shadow-2xl border border-stone-200 overflow-hidden flex flex-col max-h-[90vh]">
-            {/* Modal Header */}
+            {/* Modal Header with Prev / Next day switcher */}
             <div className="px-6 py-5 bg-stone-900 text-white flex items-center justify-between shrink-0">
               <div className="flex items-center gap-3">
-                <span className="text-base font-black px-3 py-1 rounded-xl bg-rose-500 text-white font-mono">
+                <span className="text-base font-black px-3 py-1 rounded-xl bg-rose-500 text-white font-mono shrink-0">
                   DAY {selectedDayDetail.dayNumber}
                 </span>
                 <div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-xs font-bold text-stone-300">
                       第 {selectedDayDetail.weekNumber} 週 · {selectedDayDetail.weekType === 'odd' ? '奇數週' : '偶數週'}
                     </span>
-                    <span className={`text-[10px] font-bold px-2 py-0.2 rounded-md ${selectedDayDetail.typeColor.badgeBg} ${selectedDayDetail.typeColor.badgeText}`}>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${selectedDayDetail.typeColor.badgeBg} ${selectedDayDetail.typeColor.badgeText}`}>
                       {selectedDayDetail.typeName}
                     </span>
                   </div>
-                  <h3 className="font-extrabold text-base sm:text-lg text-white mt-0.5">
+                  <h3 className="font-extrabold text-base sm:text-lg text-white mt-0.5 break-words">
                     {selectedDayDetail.title}
                   </h3>
                 </div>
               </div>
-              <button
-                onClick={() => setSelectedDayDetail(null)}
-                className="p-1.5 text-stone-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
-              >
-                ✕
-              </button>
+
+              <div className="flex items-center gap-1.5 shrink-0">
+                {/* Prev day */}
+                <button
+                  type="button"
+                  onClick={handlePrevDay}
+                  className="p-1.5 text-stone-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+                  title="查看上一天"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                </button>
+                {/* Next day */}
+                <button
+                  type="button"
+                  onClick={handleNextDay}
+                  className="p-1.5 text-stone-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+                  title="查看下一天"
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+                {/* Close */}
+                <button
+                  onClick={() => setSelectedDayDetail(null)}
+                  className="p-1.5 text-stone-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors ml-1"
+                  title="關閉"
+                >
+                  ✕
+                </button>
+              </div>
             </div>
 
             {/* Modal Content */}
@@ -658,8 +673,8 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
                         </span>
                       </div>
                     </div>
-                    <span className="px-2.5 py-1 rounded-full bg-purple-600 text-white font-extrabold text-xs shadow-xs">
-                      {selectedDayDetail.deviceUsage.mode}模式
+                    <span className="px-2.5 py-1 rounded-full bg-purple-600 text-white font-extrabold text-xs shadow-xs shrink-0">
+                      離子儀({selectedDayDetail.deviceUsage.mode})
                     </span>
                   </div>
 
@@ -668,10 +683,10 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
                       <span>🧴 搭配品項：</span>
                       <span className="text-rose-600">{selectedDayDetail.deviceUsage.pairingProduct}</span>
                     </div>
-                    <p className="leading-relaxed">
+                    <p className="leading-relaxed break-words">
                       <strong>手法指引：</strong>{selectedDayDetail.deviceUsage.instructions}
                     </p>
-                    <p className="text-amber-800 font-medium text-[11px] bg-amber-50 p-2 rounded-lg border border-amber-200">
+                    <p className="text-amber-800 font-medium text-[11px] bg-amber-50 p-2 rounded-lg border border-amber-200 break-words">
                       💡 <strong>注意提醒：</strong>{selectedDayDetail.deviceUsage.tips}
                     </p>
                   </div>
@@ -681,25 +696,42 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
               {/* Strategy Banner */}
               <div className="bg-stone-50 rounded-2xl p-4 border border-stone-200 space-y-1.5">
                 <span className="text-xs font-bold text-stone-500 uppercase tracking-wider block">
-                  今日重點策略
+                  今日完整保養 SOP 策略
                 </span>
-                <p className="text-stone-800 font-medium leading-relaxed">
+                <p className="text-stone-800 font-medium leading-relaxed break-words">
                   {selectedDayDetail.summary}
                 </p>
               </div>
 
-              {/* Product sequence list */}
+              {/* Product sequence list - Clean category labels, NO useless numbers or # tags */}
               <div className="space-y-3">
                 <span className="text-xs font-bold text-stone-700 tracking-wider flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
-                  今日指定保養品與美容儀清單（依序使用）：
+                  今日指定保養品與美容儀清單（依序使用，點擊可查產品詳情）：
                 </span>
 
                 <div className="space-y-2">
-                  {selectedDayDetail.productNumbers.map((num, idx) => {
+                  {selectedDayDetail.productNumbers.map((num) => {
                     const p = getProduct(num);
                     if (!p) return null;
                     const isDevice = num === '32';
+
+                    // Clean category label without numbers
+                    const categoryLabel = isDevice 
+                      ? '美容儀' 
+                      : p.categoryType === 'cleansing' 
+                      ? '洗卸' 
+                      : p.categoryType === 'toner' 
+                      ? '化妝水/噴霧' 
+                      : p.categoryType === 'serum' 
+                      ? '精華液' 
+                      : p.categoryType === 'cream' 
+                      ? '面霜/乳液' 
+                      : p.categoryType === 'eye' 
+                      ? '眼霜' 
+                      : p.categoryType === 'mask' 
+                      ? '面膜' 
+                      : '保養品';
 
                     return (
                       <div
@@ -714,27 +746,19 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
                         }`}
                       >
                         <div className="flex items-center gap-3">
-                          <span className="text-xs font-mono font-bold text-stone-400">
-                            {idx + 1}.
-                          </span>
-                          <span className={`text-xs font-black px-2 py-0.5 rounded-lg font-mono shrink-0 ${
-                            isDevice ? 'bg-purple-700 text-white' : 'bg-stone-900 text-white'
+                          <span className={`text-[11px] font-bold px-2 py-0.5 rounded-lg shrink-0 ${
+                            isDevice ? 'bg-purple-700 text-white' : 'bg-stone-800 text-stone-100'
                           }`}>
-                            #{p.number}
+                            {categoryLabel}
                           </span>
                           <div>
-                            <div className="flex items-center gap-1.5">
-                              <span className="text-xs font-bold text-stone-900">
+                            <div className="flex items-center gap-1.5 flex-wrap">
+                              <span className="text-xs sm:text-sm font-bold text-stone-900">
                                 {p.brand} {p.name}
                               </span>
-                              {isDevice && (
-                                <span className="text-[10px] font-extrabold px-1.5 py-0.2 rounded-md bg-purple-600 text-white">
-                                  美容儀
-                                </span>
-                              )}
                             </div>
-                            <span className="text-[11px] text-stone-500 block">
-                              {p.role} · 部位：{
+                            <span className="text-[11px] text-stone-500 block mt-0.5">
+                              {p.role} · 適用部位：{
                                 p.targetZone === 'cheeks' ? '兩頰' :
                                 p.targetZone === 'chin' ? '下巴' :
                                 p.targetZone === 'eyes' ? '眼周' : '全臉'
@@ -754,10 +778,10 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
               <div className="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 space-y-2">
                 <span className="text-xs font-bold text-amber-900 flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5 text-amber-600" />
-                  今日內服與處方服用提醒：
+                  今日內服保健品與處方用藥精準時段提醒：
                 </span>
                 <ul className="text-xs text-amber-950/80 space-y-1 list-disc list-inside">
-                  <li><strong>早餐後：</strong> PTU 3顆 ＋ 癲鍵錠 1顆 ＋ BHK's 奢光錠</li>
+                  <li><strong>早餐後：</strong> 普樂彼錠 3顆 ＋ 癲鍵錠 1顆 ＋ BHK's 奢光錠</li>
                   <li><strong>早餐後 1 小時：</strong> Thorne B 群 1 粒（與處方藥錯開）</li>
                   <li><strong>午/晚餐隨餐：</strong> 維生素 D3 (2錠) ＋ 魚油 (1粒) ＋ 蔓越莓膠囊</li>
                   <li><strong>睡前：</strong> 瑞安癲必停 0.5 顆 ＋ 易靜錠 1 顆</li>
@@ -765,25 +789,46 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
               </div>
             </div>
 
-            {/* Modal Footer */}
-            <div className="px-6 py-4 bg-stone-50 border-t border-stone-200 flex items-center justify-between shrink-0">
-              <button
-                onClick={() => {
-                  onSelectDayRoutine(selectedDayDetail.dayOfWeek, selectedDayDetail.weekType);
-                  setSelectedDayDetail(null);
-                }}
-                className="px-4 py-2 text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white rounded-xl shadow-xs transition-colors flex items-center gap-1.5"
-              >
-                <span>前往今日打卡執行此排程</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+            {/* Modal Footer with Quick Next/Prev and Action Buttons */}
+            <div className="px-6 py-4 bg-stone-50 border-t border-stone-200 flex flex-wrap items-center justify-between gap-3 shrink-0">
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handlePrevDay}
+                  className="px-3 py-1.5 text-xs font-semibold text-stone-700 bg-white hover:bg-stone-100 border border-stone-200 rounded-xl transition-colors flex items-center gap-1"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  <span>上一天</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNextDay}
+                  className="px-3 py-1.5 text-xs font-semibold text-stone-700 bg-white hover:bg-stone-100 border border-stone-200 rounded-xl transition-colors flex items-center gap-1"
+                >
+                  <span>下一天</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
 
-              <button
-                onClick={() => setSelectedDayDetail(null)}
-                className="px-4 py-2 text-xs font-semibold text-stone-600 hover:bg-stone-200/60 rounded-xl transition-colors"
-              >
-                關閉
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => {
+                    onSelectDayRoutine(selectedDayDetail.dayOfWeek, selectedDayDetail.weekType);
+                    setSelectedDayDetail(null);
+                  }}
+                  className="px-4 py-2 text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white rounded-xl shadow-xs transition-colors flex items-center gap-1.5"
+                >
+                  <span>前往今日打卡執行</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+
+                <button
+                  onClick={() => setSelectedDayDetail(null)}
+                  className="px-3 py-2 text-xs font-semibold text-stone-600 hover:bg-stone-200/60 rounded-xl transition-colors"
+                >
+                  關閉
+                </button>
+              </div>
             </div>
           </div>
         </div>

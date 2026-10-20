@@ -213,7 +213,7 @@ export const TodayTimeline: React.FC<TodayTimelineProps> = ({
                   {(selectedDayOfWeek === 0 || (selectedDayOfWeek === 3 && weekType === 'even')) && <Droplet className="w-3 h-3 text-rose-600" />}
                   <span>
                     {selectedDayOfWeek === 2 && '🧪 核心酸類煥膚'}
-                    {selectedDayOfWeek === 3 && '⚡ 美容儀深層導出'}
+                    {selectedDayOfWeek === 3 && '⚡ 離子儀(導出)'}
                     {selectedDayOfWeek === 4 && '🌙 高活性 A 醇微晶'}
                     {selectedDayOfWeek === 5 && (weekType === 'even' ? '🎯 下巴局部收斂控油' : '💧 舒緩日常修護')}
                     {selectedDayOfWeek === 6 && (weekType === 'odd' ? '🫧 每週 1 次去角質' : '⚡ 美容儀溫感導入')}
@@ -227,7 +227,7 @@ export const TodayTimeline: React.FC<TodayTimelineProps> = ({
               <div>
                 <h4 className="font-extrabold text-stone-900 text-sm leading-snug">
                   {selectedDayOfWeek === 2 && '寶拉 2% 水楊酸局部粉刺煥膚'}
-                  {selectedDayOfWeek === 3 && (weekType === 'odd' ? '#32 離子淨膚儀導出 ＋ ANUA 提亮' : '#32 離子淨膚儀導出 ＋ 加敷 33 保濕面膜')}
+                  {selectedDayOfWeek === 3 && (weekType === 'odd' ? '離子儀(導出) ＋ ANUA 提亮' : '離子儀(導出) ＋ 加敷保濕面膜')}
                   {selectedDayOfWeek === 4 && 'Celimax A 醇微晶精華撫紋抗老'}
                   {selectedDayOfWeek === 5 && (weekType === 'even' ? 'The Ordinary 菸鹼醯胺＋鋅下巴局部控油' : '靈芝水 ＋ 角鯊烷霜溫和屏障修護')}
                   {selectedDayOfWeek === 6 && (weekType === 'odd' ? 'Kanebo suisai 酵素洗顏粉代謝角質' : '#32 離子儀保濕導入 ＋ Medicube 胜肽安瓶')}
@@ -237,8 +237,8 @@ export const TodayTimeline: React.FC<TodayTimelineProps> = ({
                 <p className="text-xs text-stone-600 mt-1 leading-relaxed">
                   {selectedDayOfWeek === 2 && '僅局部點塗下巴與鼻翼粉刺區，靜置等待 3～5 分鐘溶解毛孔角栓。兩頰乾肌嚴格避開！'}
                   {selectedDayOfWeek === 3 && (weekType === 'odd'
-                    ? '#02 潔膚水浸透化妝棉夾於探頭，由內向外滑動導出殘妝 3~5 分鐘；隨後洗淨並塗抹 #13 ANUA 桃子精華提亮。'
-                    : '#02 潔膚水導出殘妝 3~5 分鐘後洗淨，立刻敷上【#33 一般保濕面膜】10-15 分鐘，兩頰契爾氏冰河霜強力封層！')}
+                    ? '舒特膚潔膚水浸透化妝棉夾於探頭，開啟導出模式由內向外滑動導出殘妝 3~5 分鐘；隨後洗淨並塗抹 ANUA 桃子精華提亮。'
+                    : '舒特膚潔膚水導出殘妝 3~5 分鐘後洗淨，立刻敷上【一般保濕面膜】10-15 分鐘，兩頰契爾氏冰河霜強力封層！')}
                   {selectedDayOfWeek === 4 && '洗臉徹底乾燥後，先擦 #25 雅詩蘭黛亮眼霜保護眼周！取豌豆大小 A 醇微晶精華均勻輕按全臉（避開眼周唇緣）。'}
                   {selectedDayOfWeek === 5 && (weekType === 'even'
                     ? '下巴出油粉刺區微量點塗 #14 TO 菸鹼醯胺控油收斂。乾燥兩頰絕不塗抹！'
