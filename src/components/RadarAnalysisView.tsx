@@ -41,14 +41,15 @@ export const RadarAnalysisView: React.FC = () => {
       target: 100,
       status: 'excellent',
       strengths: [
-        'S.NATURE 水庫角鯊烷面霜 (#21) 深層補脂修護',
-        '契爾氏冰河醣蛋白霜 (#23) 秋冬兩頰長效強效封層',
-        '黛珂小紫瓶 (#11) 微脂囊前導，直達基底修復屏障',
-        'Dr. Reju-All PDRN 修復霜 (#22) 針對脫皮泛紅急救'
+        '黛珂超微導全能修護霜 (#30) 1 兆夜間微脂囊徹夜深層修護',
+        'S.NATURE 水庫角鯊烷面霜 (#28) 深層補脂修護',
+        '契爾氏冰河醣蛋白霜 (#31) 秋冬兩頰長效強效封層',
+        '黛珂小紫瓶 (#14) 微脂囊前導，直達基底修復屏障',
+        'Dr. Reju-All PDRN 修復霜 (#29) 針對脫皮泛紅急救'
       ],
-      keyProducts: ['#11', '#21', '#23', '#22', '#09'],
+      keyProducts: ['#14', '#30', '#28', '#31', '#29'],
       gapAnalysis: '兩頰乾肌屏障保護極為完備，鎖水與補脂品項充足，換季抗乾燥能力達標。',
-      recommendation: '秋冬季或吹冷氣時，若兩頰有緊繃感，可隨時以 #09 BOH 或 #10 Ongredients 噴霧輔助補水。'
+      recommendation: '秋冬季或吹冷氣時，若兩頰有緊繃感，可隨時以 #12 BOH 或 #13 Ongredients 噴霧輔助補水。'
     },
     {
       key: 'pore',
@@ -57,12 +58,13 @@ export const RadarAnalysisView: React.FC = () => {
       target: 100,
       status: 'excellent',
       strengths: [
-        '寶拉 2% 水楊酸 (#15) 每週二專門溶解下巴與鼻翼油脂角栓',
-        'CHECK2CHECK 離子淨膚儀 (#32) 每週三搭配舒特膚潔膚水導出殘妝皮脂',
-        'Kanebo suisai 酵素洗顏粉 (#06) 奇數週六溫和代謝蛋白質老廢角質',
-        'SEXYLOOK 綠番茄奶油潔顏乳 (#05) T 字與下巴局部加強'
+        '寶拉 2% 水楊酸 (#21) 每週二專門溶解下巴與鼻翼油脂角栓',
+        'CHECK2CHECK 離子淨膚儀 (美容儀) 每週三搭配舒特膚潔膚水 (#03) 導出殘妝皮脂',
+        'Kanebo suisai 酵素洗顏粉 (#08) 奇數週六溫和代謝蛋白質老廢角質',
+        'SEXYLOOK 綠番茄奶油潔顏乳 (#07) T 字與下巴局部加強',
+        'ilso 溫和粉刺溶解露 (#01) 協同水楊酸打造無痛清粉刺組合'
       ],
-      keyProducts: ['#15', '#32', '#02', '#06', '#05'],
+      keyProducts: ['#21', '#01', '#03', '#08', '#07'],
       gapAnalysis: '代謝節奏精密，物理導出與化學酸類分日交替，沒有連續疊加傷害屏障的風險。',
       recommendation: '嚴格遵守寶拉水楊酸只塗下巴鼻翼、靜置 3-5 分鐘的鐵則，兩頰乾肌切勿沾染。'
     },
@@ -73,12 +75,12 @@ export const RadarAnalysisView: React.FC = () => {
       target: 100,
       status: 'good',
       strengths: [
-        'Celimax A 醇微晶精華 (#17) 每週四固定刺激膠原新生與細緻角質',
-        '雅詩蘭黛特潤眼霜 (#25) 建立眼周安全隔離障壁，預防乾紋',
-        '巴黎萊雅紫熨斗 MAX (#26) 晨間或修護夜深層撫平眼下細紋',
-        'Medicube PDRN 胜肽安瓶 (#12) 偶數週六離子儀溫感導入'
+        'Celimax A 醇微晶精華 (#23) 每週四固定刺激膠原新生與細緻角質',
+        '雅詩蘭黛特潤眼霜 (#34) 建立眼周安全隔離障壁，預防乾紋',
+        '巴黎萊雅紫熨斗 MAX (#35) 晨間或修護夜深層撫平眼下細紋',
+        'Medicube PDRN 胜肽安瓶 (#17) 偶數週六離子儀溫感導入'
       ],
-      keyProducts: ['#17', '#25', '#26', '#12', '#32'],
+      keyProducts: ['#23', '#34', '#35', '#17'],
       gapAnalysis: 'A 醇與眼周專用撫紋產品配置精準，且有眼霜預先隔離的安全防護。',
       recommendation: 'A 醇使用量維持豌豆大小即可，切勿因急於求成增加頻率，維持每週四單次微晶抗老最安全。'
     },
@@ -89,14 +91,15 @@ export const RadarAnalysisView: React.FC = () => {
       target: 100,
       status: 'excellent',
       strengths: [
-        'MUJI 米糠發酵乳液 (#18) 每日早晚下巴專屬清爽鎖水，不悶閉口',
-        'The Ordinary 10% 菸鹼醯胺＋1% 鋅 (#14) 偶數週五局部點塗下巴控油',
-        'Quality 1st AZ100 壬二酸藍瓶面膜 (#30) 奇數週日抗痘消炎',
-        '徹底戒除厚霜塗抹下巴的習慣，避免毛孔悶塞'
+        'MUJI 米糠發酵乳液 (#25) 每日早晚下巴專屬清爽鎖水，不悶閉口',
+        '小林製藥抗痘化妝水 (#09) 下巴局部二次清潔抑菌',
+        'The Ordinary 10% 菸鹼醯胺＋1% 鋅 (#20) 偶數週五局部點塗下巴控油',
+        'Quality 1st AZ100 痘痘藍瓶面膜 奇數週日抗痘消炎',
+        'Acclear Cream 局部痘痘藥 (#24) 突發紅腫痘消炎鎮痛'
       ],
-      keyProducts: ['#18', '#14', '#30'],
+      keyProducts: ['#25', '#09', '#20', '#24'],
       gapAnalysis: '分區保養落實徹底，下巴只給清爽水相與發酵米糠乳液，完美對抗反覆發炎痘痘。',
-      recommendation: '下巴出油較多時可加強米糠乳液吸收，遇紅腫囊腫痘可局部以 AZ100 精華厚敷點塗。'
+      recommendation: '下巴出油較多時可加強米糠乳液吸收，遇紅腫囊腫痘可局部點塗 #24 Acclear 痘痘藥。'
     },
     {
       key: 'photoprotect',
@@ -105,12 +108,13 @@ export const RadarAnalysisView: React.FC = () => {
       target: 100,
       status: 'good',
       strengths: [
-        'd’Alba 黛爾泊粉光校色提亮防曬霜 (#28) 上班日單擦自帶透亮水光',
-        '曼秀雷敦水潤肌玻尿酸防曬 (#29) 完整底妝日高保濕無粉感透明防護',
-        'ANUA 70% 桃子菸鹼醯胺精華 (#13) 奇數週白天溫和抗氧化提亮',
-        '植村秀無極限妝前乳 (#31) 局部修飾嘴角與暗沉蠟黃'
+        '黛珂瑩潤粹白極光煥采精粹 (#15) 天然麴酸專研淡斑，阻斷色素沉著',
+        'd’Alba 黛爾泊粉光校色提亮防曬霜 (#38) 上班日單擦自帶透亮水光',
+        '曼秀雷敦水潤肌玻尿酸防曬 (#39) 完整底妝日高保濕無粉感透明防護',
+        'ANUA 桃子菸鹼醯胺精華 (#19) 奇數週白天溫和抗氧化提亮',
+        '植村秀無極限妝前乳 局部修飾嘴角與暗沉蠟黃'
       ],
-      keyProducts: ['#28', '#29', '#13', '#31'],
+      keyProducts: ['#15', '#38', '#39', '#19'],
       gapAnalysis: '防曬質地兼顧素顏上班日與底妝日需求，晨間精華抗氧化搭配得宜。',
       recommendation: '【重點缺口】：戶外活動或靠窗工作超過 4 小時時，需注意防曬補塗；建議防曬塗抹範圍可延伸至頸部。'
     },
@@ -121,11 +125,11 @@ export const RadarAnalysisView: React.FC = () => {
       target: 100,
       status: 'excellent',
       strengths: [
-        'CHECK2CHECK 離子淨膚儀 (#32) 具備「深層導出」與「保濕導入」雙模式',
-        '週三搭配舒特膚潔膚水 (#02) 電荷吸附毛孔殘留',
-        '偶數週六搭配 Medicube PDRN 胜肽安瓶 (#12) 溫感導入促進吸收'
+        'CHECK2CHECK 離子淨膚儀 (美容儀) 具備「深層導出」與「保濕導入」雙模式',
+        '週三搭配舒特膚潔膚水 (#03) 電荷吸附毛孔殘留',
+        '偶數週六搭配 Medicube PDRN 胜肽安瓶 (#17) 溫感導入促進吸收'
       ],
-      keyProducts: ['#32', '#02', '#12'],
+      keyProducts: ['美容儀', '#03', '#17'],
       gapAnalysis: '家用儀器與保養品項高度連動，週三深層清潔與週六深層導入分流清晰。',
       recommendation: '導出時化妝棉需保持充分濕潤，避免摩擦拉扯；儀器金屬探頭使用後需以乾淨棉片清潔消毒。'
     }
@@ -136,16 +140,16 @@ export const RadarAnalysisView: React.FC = () => {
     {
       key: 'antioxidant',
       label: '全身抗氧化與提亮透光',
-      score: 92,
+      score: 95,
       target: 100,
       status: 'excellent',
       strengths: [
-        "BHK's 奢光錠 (#01) 含有高純度谷胱甘肽與維生素 C",
-        '全面取消夜間服用，改為白天餐後吸收更佳',
-        'Webber Naturals 蔓越莓 (#05) 高濃度前花青素協同抗自由基'
+        '8VC 2200mg 日本 8 效維生素 C 粉 (#01) 8重維C釋放強效抗氧化淡斑',
+        "BHK's 奢光錠 (#02) 高純度谷胱甘肽與亮白抗氧化，全面移至白天隨餐吃",
+        'Webber Naturals 蔓越莓 (#06) 高濃度前花青素協同抗自由基'
       ],
-      keyProducts: ['BHK\'s 奢光錠', '蔓越莓濃縮膠囊'],
-      gapAnalysis: '谷胱甘肽與花青素雙重抗氧化網絡完整，且避開了睡前精神科安眠藥物干擾。',
+      keyProducts: ['8VC 維生素 C 粉', "BHK's 奢光錠", '蔓越莓濃縮膠囊'],
+      gapAnalysis: '多重型態維生素 C、谷胱甘肽與花青素三重抗氧化網絡完整，且避開了睡前精神科安眠藥物干擾。',
       recommendation: '白天配合充足水分與日曬防護，能讓體內抗自由基效益最大化。'
     },
     {
@@ -155,7 +159,7 @@ export const RadarAnalysisView: React.FC = () => {
       target: 100,
       status: 'excellent',
       strengths: [
-        'Sports Research 阿拉斯加 Omega-3 魚油 (#04) 高濃度 EPA/DHA',
+        'Sports Research 阿拉斯加 Omega-3 魚油 (#05) 高濃度 EPA/DHA',
         '從人體前列腺素代謝途徑抑制下巴粉刺與痘痘發炎連鎖反應',
         '潤澤乾性兩頰皮膚細胞膜，改善粗糙起屑'
       ],
@@ -170,7 +174,7 @@ export const RadarAnalysisView: React.FC = () => {
       target: 100,
       status: 'excellent',
       strengths: [
-        'Thorne 基本維生素 B 複合物 (#03) 高活性甲基化葉酸與活性 B12',
+        'Thorne 基本維生素 B 複合物 (#04) 高活性甲基化葉酸與活性 B12',
         '嚴格落實早餐處方藥（PTU+癲鍵錠）後「間隔 1 小時」服用',
         '支援粒線體能量生成，維持肌膚角質細胞屏障合成'
       ],
@@ -185,7 +189,7 @@ export const RadarAnalysisView: React.FC = () => {
       target: 100,
       status: 'good',
       strengths: [
-        'Kirkland 科克蘭 維生素 D3 (#02) 每日 2 錠 (700 IU)',
+        'Kirkland 科克蘭 維生素 D3 (#03) 每日 2 錠 (700 IU)',
         '調控抗菌胜肽生成，輔助皮膚表皮抗菌屏障',
         '維持體內鈣質平衡與神經肌肉正常生理'
       ],
@@ -200,7 +204,7 @@ export const RadarAnalysisView: React.FC = () => {
       target: 100,
       status: 'excellent',
       strengths: [
-        'Webber Naturals 蔓越莓濃縮精華 (#05) 500mg，36:1 高倍濃縮',
+        'Webber Naturals 蔓越莓濃縮精華 (#06) 500mg，36:1 高倍濃縮',
         '前花青素（PACs）天然防護，預防黏附',
         '植物多酚支援全身微循環抗氧化'
       ],
@@ -258,7 +262,7 @@ export const RadarAnalysisView: React.FC = () => {
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-stone-500 mt-1 max-w-3xl leading-relaxed">
-              透過多維度數值化模型，深度評估您的 31 項外用品 ＋ 美容儀 ＋ 5 款保健品的覆蓋飽和度、屏障優勢與補強焦點。
+              透過多維度數值化模型，深度評估您的 41 項外用品 ＋ 6 款身體乳 ＋ 美容儀 ＋ 6 款保健品的覆蓋飽和度、屏障優勢與補強焦點。
             </p>
           </div>
 

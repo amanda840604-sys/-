@@ -100,7 +100,7 @@ export const SafetyGuideView: React.FC = () => {
           <div className="p-3 rounded-2xl bg-purple-50 border border-purple-200">
             <span className="font-bold text-purple-800 block">週三</span>
             <span className="text-base my-1 block">🌿</span>
-            <span className="font-bold text-purple-700">離子深層導出</span>
+            <span className="font-bold text-purple-700">離子儀(導出)</span>
             <span className="text-[10px] text-purple-600 block mt-1">舒特膚潔膚水</span>
           </div>
 

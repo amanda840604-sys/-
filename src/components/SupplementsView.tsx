@@ -36,7 +36,7 @@ export const SupplementsView: React.FC = () => {
                 <Pill className="w-5 h-5" />
               </span>
               <h2 className="text-xl font-extrabold text-stone-900 tracking-tight">
-                常規處方用藥 ＆ 5款內服保健品黃金指南
+                常規處方用藥 ＆ 6款內服保健品黃金指南
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-stone-500 mt-1 max-w-2xl leading-relaxed">
@@ -51,7 +51,7 @@ export const SupplementsView: React.FC = () => {
                 selectedCategory === 'all' ? 'bg-white text-stone-900 shadow-xs' : 'text-stone-600'
               }`}
             >
-              全部 (9項)
+              全部 ({PRESCRIPTION_MEDS.length + ORAL_SUPPLEMENTS.length}項)
             </button>
             <button
               onClick={() => setSelectedCategory('rx')}
@@ -59,7 +59,7 @@ export const SupplementsView: React.FC = () => {
                 selectedCategory === 'rx' ? 'bg-white text-stone-900 shadow-xs' : 'text-stone-600'
               }`}
             >
-              🩺 處方用藥 (4項)
+              🩺 處方用藥 ({PRESCRIPTION_MEDS.length}項)
             </button>
             <button
               onClick={() => setSelectedCategory('supplements')}
@@ -67,7 +67,7 @@ export const SupplementsView: React.FC = () => {
                 selectedCategory === 'supplements' ? 'bg-white text-stone-900 shadow-xs' : 'text-stone-600'
               }`}
             >
-              💊 保健食品 (5款)
+              💊 保健食品 ({ORAL_SUPPLEMENTS.length}款)
             </button>
           </div>
         </div>
@@ -143,6 +143,14 @@ export const SupplementsView: React.FC = () => {
                     </div>
                     <p className="text-stone-600 mt-1 leading-relaxed">{med.instructions}</p>
                   </div>
+
+                  {/* 藥物主要功效 */}
+                  <div className="mt-2.5 p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/70 text-xs">
+                    <div className="flex items-center gap-1.5 font-bold text-amber-950 mb-0.5">
+                      <span>🩺 藥物功效：</span>
+                    </div>
+                    <p className="text-amber-900/90 leading-relaxed font-medium">{med.efficacy}</p>
+                  </div>
                 </div>
 
                 <div className="mt-3 pt-3 border-t border-stone-100 text-[11px] text-stone-500 flex items-start gap-1.5">
@@ -155,13 +163,13 @@ export const SupplementsView: React.FC = () => {
         </div>
       )}
 
-      {/* 💊 Section 2: 5 款內服保健品 */}
+      {/* 💊 Section 2: 6 款內服保健品 */}
       {(selectedCategory === 'all' || selectedCategory === 'supplements') && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="font-extrabold text-stone-800 text-base flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-              二、5 款內服保健品黃金服用指南
+              二、6 款內服保健品黃金服用指南
             </h3>
             <span className="text-xs text-stone-500">含原廠規格、吸收搭配與調整歷程</span>
           </div>

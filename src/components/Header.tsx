@@ -79,7 +79,7 @@ export const Header: React.FC<HeaderProps> = ({
               </span>
             </div>
             <p className="text-xs text-stone-500 flex items-center gap-1.5 mt-0.5">
-              <span>31項外用品 ＋ 美容儀 ＋ 5款保健品 ＋ 4項處方用藥</span>
+              <span>41項外用品 ＋ 6款身體乳 ＋ 美容儀 ＋ 6款保健品 ＋ 4項處方用藥</span>
             </p>
           </div>
         </div>
@@ -246,7 +246,7 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
           >
             <SlidersHorizontal className="w-3.5 h-3.5" />
-            <span>全庫存 (33+5+4)</span>
+            <span>全庫存</span>
           </button>
 
           <button

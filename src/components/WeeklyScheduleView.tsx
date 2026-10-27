@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layers, Sparkles, CheckCircle2, ChevronRight, AlertCircle, Calendar } from 'lucide-react';
+import { Layers, Sparkles, CheckCircle2, ChevronRight, ChevronDown, ChevronUp, AlertCircle, Calendar } from 'lucide-react';
 import { WeekType, SkincareProduct } from '../types/routine';
 import { WEEKLY_NIGHT_ROUTINES, SKINCARE_PRODUCTS } from '../data/routineData';
 
@@ -17,7 +17,7 @@ export const WeeklyScheduleView: React.FC<WeeklyScheduleViewProps> = ({
   const [activeTabWeek, setActiveTabWeek] = useState<WeekType>(currentWeekType);
   const [expandedDay, setExpandedDay] = useState<number | null>(null);
 
-  const getProduct = (num: string) => SKINCARE_PRODUCTS.find(p => p.number === num);
+  const getProduct = (num: string) => SKINCARE_PRODUCTS.find(p => p.number === num || p.id === num || p.id === `p-${num}` || (num === 'device' && p.categoryType === 'device') || (num.startsWith('mask') && p.categoryType === 'mask') || (num === 'mask' && p.categoryType === 'mask'));
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto pb-16">
@@ -34,7 +34,7 @@ export const WeeklyScheduleView: React.FC<WeeklyScheduleViewProps> = ({
               </h2>
             </div>
             <p className="text-xs sm:text-sm text-stone-500 mt-1 max-w-2xl leading-relaxed">
-              31 項外用品項以「每週主題」＋「奇偶週輪替」精密分流，避免高活性成分連續疊加，同時照顧兩頰保濕與下巴淨膚。
+              41 項外用品項、局部痘痘藥、美容儀 ＋ 6 款身體乳以「每週主題」＋「奇偶週輪替」精密分流，避免高活性成分連續疊加，同時照顧兩頰保濕與下巴淨膚。
             </p>
           </div>
 
@@ -69,21 +69,21 @@ export const WeeklyScheduleView: React.FC<WeeklyScheduleViewProps> = ({
             <span className="w-2 h-2 rounded-full bg-rose-500 mt-1.5 shrink-0" />
             <div>
               <strong>固定功能夜：</strong>
-              <p className="text-stone-500">週二固定水楊酸、週四固定 A 醇微晶（兩週維持不變）</p>
+              <p className="text-stone-500">週二固定水楊酸(可搭ilso溶解露)、週四固定 A 醇微晶（兩週維持不變）</p>
             </div>
           </div>
           <div className="flex items-start gap-2">
             <span className="w-2 h-2 rounded-full bg-purple-500 mt-1.5 shrink-0" />
             <div>
               <strong>週末交替亮點：</strong>
-              <p className="text-stone-500">奇週六酵素洗顏／偶週六離子儀胜肽導入；奇週日AZ100藍膜／偶週日VT300微針</p>
+              <p className="text-stone-500">奇週六酵素洗顏／偶週六離子儀胜肽導入；奇週日AZ100藍膜／偶週日純保濕面膜</p>
             </div>
           </div>
           <div className="flex items-start gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
             <div>
               <strong>保濕封層交替：</strong>
-              <p className="text-stone-500">奇數週兩頰主力 S.NATURE / 偶數週兩頰契爾氏冰河霜</p>
+              <p className="text-stone-500">奇數週兩頰主力 S.NATURE (或妮維雅淡斑) / 偶數週兩頰契爾氏冰河霜</p>
             </div>
           </div>
         </div>
@@ -144,12 +144,24 @@ export const WeeklyScheduleView: React.FC<WeeklyScheduleViewProps> = ({
                     }}
                     className="px-3 py-1.5 text-xs font-bold text-rose-600 hover:text-white hover:bg-rose-600 border border-rose-200 hover:border-rose-600 rounded-xl transition-all flex items-center gap-1"
                   >
-                    <span>載入此日打卡</span>
+                    <span>打卡</span>
                     <ChevronRight className="w-3.5 h-3.5" />
                   </button>
-                  <span className="text-xs text-stone-400 font-semibold px-2 py-1">
-                    {isExpanded ? '收合' : '展開步驟'}
-                  </span>
+                  <button 
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setExpandedDay(isExpanded ? null : day.dayOfWeek);
+                    }}
+                    className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all ${
+                      isExpanded 
+                        ? 'bg-rose-100 text-rose-700 shadow-xs' 
+                        : 'bg-stone-100 hover:bg-stone-200 text-stone-500'
+                    }`}
+                    aria-label="箭頭切換展開或收合"
+                  >
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180 text-rose-600' : 'text-stone-500'}`} />
+                  </button>
                 </div>
               </div>
 

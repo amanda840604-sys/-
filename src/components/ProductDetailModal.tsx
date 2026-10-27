@@ -75,6 +75,19 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
             </p>
           </div>
 
+          {/* Usage Timing */}
+          {product.usageTiming && (
+            <div className="bg-amber-50/80 border border-amber-200/90 rounded-2xl p-4">
+              <span className="text-xs font-bold text-amber-800 uppercase tracking-wider block mb-1 flex items-center gap-1.5">
+                <Clock className="w-4 h-4 text-amber-700" />
+                建議最佳使用時機
+              </span>
+              <p className="text-amber-950 font-bold text-sm">
+                {product.usageTiming}
+              </p>
+            </div>
+          )}
+
           {/* Usage Instructions */}
           <div>
             <span className="text-xs font-bold text-stone-700 uppercase tracking-wider block mb-2">

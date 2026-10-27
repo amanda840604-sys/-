@@ -102,6 +102,31 @@ export default function App() {
     }
   }, [waterIntakeMl, dateKey]);
 
+  // Makeup Day State (Natural vs Full Makeup)
+  const [isMakeupDay, setIsMakeupDay] = useState<boolean>(() => {
+    try {
+      const saved = localStorage.getItem(`glowsync_makeup_day_${dateKey}`);
+      return saved ? JSON.parse(saved) : false;
+    } catch {
+      return false;
+    }
+  });
+
+  const handleToggleMakeupDay = (val?: boolean) => {
+    setIsMakeupDay((prev) => {
+      const next = typeof val === 'boolean' ? val : !prev;
+      try {
+        localStorage.setItem(`glowsync_makeup_day_${dateKey}`, JSON.stringify(next));
+      } catch (e) {
+        console.warn('LocalStorage error:', e);
+      }
+      return next;
+    });
+    if (reminderConfig.soundEnabled) {
+      playChime(520, 680);
+    }
+  };
+
   const handleSaveReminderConfig = (newConfig: ReminderConfig) => {
     setReminderConfig(newConfig);
     try {
@@ -207,6 +232,8 @@ export default function App() {
             onUpdateWater={setWaterIntakeMl}
             onOpenTimerWithMode={handleOpenTimerWithMode}
             onSelectProduct={setSelectedProduct}
+            isMakeupDay={isMakeupDay}
+            onToggleMakeupDay={handleToggleMakeupDay}
           />
         )}
 

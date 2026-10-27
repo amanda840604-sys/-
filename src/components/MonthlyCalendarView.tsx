@@ -74,7 +74,16 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
   const [selectedDayDetail, setSelectedDayDetail] = useState<CalendarDayData | null>(null);
   const [filterType, setFilterType] = useState<string>('all');
 
-  const getProduct = (num: string) => SKINCARE_PRODUCTS.find(p => p.number === num);
+  const getProduct = (num: string) => {
+    return SKINCARE_PRODUCTS.find(p => 
+      p.number === num || 
+      p.id === num || 
+      p.id === `p-${num}` || 
+      (num === 'device' && p.categoryType === 'device') || 
+      (num.startsWith('mask') && p.categoryType === 'mask') || 
+      (num === 'mask' && p.categoryType === 'mask')
+    );
+  };
 
   // Calculate which day in the 4-week cycle corresponds to "Today"
   const todayDayOfWeek = currentDate.getDay();
@@ -106,9 +115,9 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
         },
         title: '日常溫和修護',
         summary: weekType === 'odd'
-          ? '日間防曬，夜間溫和卸洗 ＋ 靈芝水 ＋ BOH噴霧 ＋ 兩頰S.NATURE霜／下巴米糠乳'
-          : '偶數週修護：MUJI化妝水 ＋ Ongredients噴霧 ＋ 契爾氏冰河霜(兩頰)／下巴米糠乳',
-        productNumbers: weekType === 'odd' ? ['03', '04', '11', '07', '09', '21', '18'] : ['03', '04', '11', '08', '10', '23', '18']
+          ? '小林抗痘水(下巴) ＋ 小紫瓶 ＋ 黛珂極光 ＋ Torriden ＋ 靈芝水 ＋ BOH噴霧 ＋ 兩頰S.NATURE霜／下巴米糠乳'
+          : '偶數週修護：小林抗痘水(下巴) ＋ 小紫瓶 ＋ 黛珂極光 ＋ Torriden ＋ MUJI化妝水 ＋ 契爾氏冰河霜／下巴米糠乳',
+        productNumbers: weekType === 'odd' ? ['02', '06', '09', '14', '15', '16', '10', '12', '34', '28', '25'] : ['02', '06', '09', '14', '15', '16', '11', '13', '34', '31', '25']
       });
 
       // Tue (dayOfWeek 2)
@@ -127,8 +136,8 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
           badgeText: 'text-amber-900'
         },
         title: '寶拉水楊酸煥膚',
-        summary: '下巴與鼻翼點塗寶拉水楊酸（靜置3-5分鐘），兩頰嚴禁碰酸！MUJI化妝水打底',
-        productNumbers: ['01', '04', '15', '11', '08', '25', weekType === 'odd' ? '21' : '23', '18']
+        summary: '下巴與鼻翼點塗寶拉水楊酸（#21，靜置3-5分鐘），可搭 ilso 溶解露粉刺大掃除，兩頰嚴禁碰酸！',
+        productNumbers: ['02', '06', '01', '21', '14', '11', '34', weekType === 'odd' ? '28' : '31', '25']
       });
 
       // Wed (dayOfWeek 3) -> ⚡ 離子儀(導出)
@@ -146,11 +155,11 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
           badgeBg: 'bg-teal-100',
           badgeText: 'text-teal-900'
         },
-        title: weekType === 'odd' ? '離子儀(導出) ＋ ANUA提亮' : '離子儀(導出) ＋ 保濕面膜',
+        title: weekType === 'odd' ? '離子儀(導出) ＋ 提亮精粹' : '離子儀(導出) ＋ 保濕面膜',
         summary: weekType === 'odd'
-          ? '舒特膚潔膚水 ＋ 離子儀(導出)毛孔殘妝 ➔ ANUA桃子精華提亮'
+          ? '舒特膚潔膚水 ＋ 離子儀(導出)毛孔殘妝 ➔ 黛珂極光(#15) ＋ Torriden補水 ＋ ANUA提亮 ＋ 兩頰S.NATURE霜'
           : '離子儀(導出)殘妝 ＋ 敷一片保濕修護面膜（10-15分）＋ 契爾氏冰河霜封層',
-        productNumbers: weekType === 'odd' ? ['02', '32', '04', '11', '09', '13', '21', '18'] : ['02', '32', '04', '11', '33', '10', '23', '18'],
+        productNumbers: weekType === 'odd' ? ['03', 'device', '06', '14', '15', '16', '12', '19', '34', '28', '25'] : ['03', 'device', '06', '14', 'mask', '13', '34', '31', '25'],
         deviceUsage: {
           mode: '導出',
           name: 'CHECK2CHECK 離子儀(導出)',
@@ -177,8 +186,8 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
           badgeText: 'text-indigo-900'
         },
         title: 'Celimax A 醇微晶抗老',
-        summary: '改善細紋與角質代謝；塗 A 醇前先以雅詩蘭黛眼霜隔離眼周！豌豆大小避開眼周',
-        productNumbers: ['01', '04', '11', '08', '25', '17', weekType === 'odd' ? '21' : '23', '18']
+        summary: '改善細紋與角質代謝；塗 A 醇前先以雅詩蘭黛眼霜(#34)隔離眼周！豌豆大小避開眼周',
+        productNumbers: ['02', '06', '14', '11', '34', '23', weekType === 'odd' ? '28' : '30', '25']
       });
 
       // Fri (dayOfWeek 5)
@@ -198,9 +207,9 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
         },
         title: weekType === 'odd' ? '舒緩屏障修護' : '下巴局部點塗菸鹼醯胺',
         summary: weekType === 'odd'
-          ? '週末前夕舒緩放鬆，以靈芝水與角鯊烷霜強化保濕屏障，下巴維持米糠乳'
-          : '下巴易出油粉刺區微量點塗 The Ordinary 菸鹼醯胺控油（絕不塗兩頰）',
-        productNumbers: weekType === 'odd' ? ['03', '04', '11', '07', '25', '21', '18'] : ['03', '04', '11', '08', '14', '25', '23', '18']
+          ? '小林抗痘水下巴抑菌，以靈芝水、黛珂極光與 Dr. Reju-All 修復霜強化屏障，下巴維持米糠乳'
+          : '小林抗痘水，下巴點塗 The Ordinary 菸鹼醯胺(#20)控油，兩頰使用妮維雅 630 淡斑晚霜(#32)',
+        productNumbers: weekType === 'odd' ? ['04', '06', '09', '14', '15', '16', '10', '12', '34', '29', '25'] : ['04', '06', '09', '14', '15', '16', '11', '13', '34', '32', '20', '25']
       });
 
       // Sat (dayOfWeek 6) -> 偶數週六 ⚡ 離子儀(導入)
@@ -220,15 +229,15 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
         },
         title: weekType === 'odd' ? 'suisai 酵素洗顏代謝' : '離子儀(導入) ＋ 胜肽安瓶',
         summary: weekType === 'odd'
-          ? '佳麗寶 suisai 酵素洗顏粉溫和代謝老廢角質與下巴粉刺，當晚停用酸類'
-          : '離子儀(導入)搭配 Medicube PDRN 胜肽安瓶 ＋ 契爾氏冰河霜強力鎖水',
-        productNumbers: weekType === 'odd' ? ['01', '06', '11', '07', '21', '18'] : ['01', '04', '11', '12', '32', '23', '18'],
+          ? '佳麗寶 suisai 酵素洗顏粉(#08)溫和代謝老廢角質與下巴粉刺，兩頰深層潤澤，當晚停用酸類'
+          : '離子儀(導入)搭配 Medicube PDRN 胜肽安瓶(#17) ＋ 契爾氏冰河霜(#31)強力鎖水',
+        productNumbers: weekType === 'odd' ? ['02', '08', '14', '10', '34', '28', '25'] : ['02', '06', '14', '17', 'device', '34', '31', '25'],
         isMakeupDay: true,
         ...(weekType === 'even' ? {
           deviceUsage: {
             mode: '導入',
             name: 'CHECK2CHECK 離子儀(導入)',
-            pairingProduct: 'Medicube PDRN 粉紅胜肽補水安瓶',
+            pairingProduct: 'Medicube PDRN 粉紅胜肽安瓶',
             duration: '5 分鐘',
             instructions: '全臉按拍黛珂小紫瓶打底後，均勻滴上 3~4 滴 Medicube PDRN 胜肽安瓶。開啟淨膚儀「導入模式」，以金屬探頭貼合臉部皮膚，順著下巴輪廓線、兩頰向太陽穴方向緩慢向上滑動按摩，透過溫感與微震動將胜肽小分子推入肌底。',
             tips: '導入完成後肌膚水潤透亮，兩頰請立刻厚塗契爾氏冰河霜封存，下巴薄擦米糠乳液。'
@@ -261,9 +270,9 @@ export const MonthlyCalendarView: React.FC<MonthlyCalendarViewProps> = ({
             },
         title: weekType === 'odd' ? 'AZ100 痘痘藍膜日' : '一般日常保濕面膜日',
         summary: weekType === 'odd'
-          ? '敷 AZ100 壬二酸藍膜（10-15分），噴 BOH 噴霧，兩頰以 Dr. Reju-All 修復霜強力封層（下巴薄擦米糠乳）'
-          : '敷一般日常保濕面膜（10-15分），噴 Ongredients 噴霧，兩頰以契爾氏冰河霜強力封層（下巴薄擦米糠乳）',
-        productNumbers: weekType === 'odd' ? ['02', '04', '11', '30', '09', '22', '18'] : ['02', '04', '11', '33', '10', '23', '18']
+          ? '敷 AZ100 痘痘藍膜（10-15分），噴 BOH 噴霧，兩頰以 Dr. Reju-All 修復霜(#29)強力封層（下巴薄擦米糠乳）'
+          : '敷一般日常保濕面膜（10-15分），噴 Ongredients 噴霧，兩頰以契爾氏冰河霜(#31)強力封層（下巴薄擦米糠乳）',
+        productNumbers: weekType === 'odd' ? ['03', '06', '14', 'mask', '12', '34', '29', '25'] : ['03', '06', '14', 'mask', '13', '34', '31', '25']
       });
     }
 
